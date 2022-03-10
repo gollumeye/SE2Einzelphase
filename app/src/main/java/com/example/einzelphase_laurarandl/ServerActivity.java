@@ -17,11 +17,9 @@ public class ServerActivity extends Thread {
     @Override
     public void run(){
         try {
-            BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
             Socket clientSocket = new Socket("se2-isys.aau.at", 53212);
             DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            //input = inFromUser.readLine();
             outToServer.writeBytes(input + "\n");
             this.answer = inFromServer.readLine();
             clientSocket.close();
@@ -30,7 +28,4 @@ public class ServerActivity extends Thread {
             this.answer = "Error occurred during communication with server!";
         }
     }
-
-
-
 }
